@@ -9,6 +9,7 @@ import {
   Fog,
   Group,
   IcosahedronGeometry,
+  LinearFilter,
   Mesh,
   MeshBasicMaterial,
   MeshStandardMaterial,
@@ -44,7 +45,7 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
     renderer.setSize(mount.clientWidth, mount.clientHeight)
     renderer.outputColorSpace = SRGBColorSpace
     renderer.toneMapping = ACESFilmicToneMapping
-    renderer.toneMappingExposure = 1.25
+    renderer.toneMappingExposure = 1.72
     renderer.domElement.className = 'intro-canvas'
     mount.appendChild(renderer.domElement)
 
@@ -52,12 +53,12 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
     scene.fog = new Fog('#050505', 5, 13)
     const camera = new PerspectiveCamera(44, mount.clientWidth / mount.clientHeight, 0.1, 100)
     camera.position.z = 5.3
-    scene.add(new AmbientLight('#ffffff', 0.16))
+    scene.add(new AmbientLight('#ffffff', 0.28))
 
-    const spot = new SpotLight('#f7f8ff', 14, 0, 0.38, 1)
-    spot.position.set(3, 4, 5)
+    const spot = new SpotLight('#f7f8ff', 21, 0, 0.42, 1)
+    spot.position.set(3, 4.5, 5)
     scene.add(spot)
-    const blueLight = new PointLight('#00218c', 30, 12)
+    const blueLight = new PointLight('#00218c', 18, 10)
     blueLight.position.set(-4, -1, 2)
     scene.add(blueLight)
 
@@ -83,6 +84,8 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
     const textures = planetTiles.map((tile) => {
       const texture = textureLoader.load(tile)
       texture.colorSpace = SRGBColorSpace
+      texture.minFilter = LinearFilter
+      texture.magFilter = LinearFilter
       return texture
     })
     const faceGeometry = new IcosahedronGeometry(1.24, 2).toNonIndexed()
@@ -102,11 +105,11 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       geometry.computeVertexNormals()
       const material = new MeshStandardMaterial({
         map: textures[(faceIndex * 11) % textures.length],
-        color: '#b8c7ff',
-        roughness: 0.64,
-        metalness: 0.18,
-        emissive: '#001458',
-        emissiveIntensity: 0.18,
+        color: '#eef3ff',
+        roughness: 0.46,
+        metalness: 0.08,
+        emissive: '#00081f',
+        emissiveIntensity: 0.035,
         side: DoubleSide,
       })
       const tileMesh = new Mesh(geometry, material)
@@ -115,11 +118,13 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       core.add(tileMesh)
     }
 
-    const wire = new Mesh(faceGeometry.clone(), new MeshBasicMaterial({ color: '#9bb1ff', wireframe: true, transparent: true, opacity: 0.25 }))
+    const wire = new Mesh(faceGeometry.clone(), new MeshBasicMaterial({ color: '#6f8fff', wireframe: true, transparent: true, opacity: 0.42 }))
     wire.scale.setScalar(1.014)
+    const edgeGlow = new Mesh(faceGeometry.clone(), new MeshBasicMaterial({ color: '#00218c', wireframe: true, transparent: true, opacity: 0.18 }))
+    edgeGlow.scale.setScalar(1.028)
     const blueRing = new Mesh(
       new TorusGeometry(1.82, 0.008, 16, 150),
-      new MeshBasicMaterial({ color: '#315de0', transparent: true, opacity: 0.7 }),
+      new MeshBasicMaterial({ color: '#315de0', transparent: true, opacity: 0.62 }),
     )
     blueRing.rotation.set(Math.PI / 2, 0.2, 0)
     const glassRing = new Mesh(
@@ -127,7 +132,7 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       new MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.28 }),
     )
     glassRing.rotation.set(0.32, 0.75, 0)
-    core.add(wire, blueRing, glassRing, new PointLight('#002aff', 35, 7))
+    core.add(wire, edgeGlow, blueRing, glassRing, new PointLight('#002aff', 22, 6))
     scene.add(core)
 
     const pointer = { x: 0, y: 0 }

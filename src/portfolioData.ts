@@ -1,12 +1,30 @@
 export type ProjectAction = 'external' | 'client-library' | 'social-library' | 'concept'
 
 export const capabilities = [
-  'Apps',
-  'Websites',
-  'Social Media Content',
-  'AI Automation',
-  'Modeling',
-  'Business Systems',
+  {
+    title: 'Apps',
+    description: 'Mobile and web apps with clean UI, smart flows and real business use.',
+  },
+  {
+    title: 'Websites',
+    description: 'Premium landing pages and websites designed to look modern and convert.',
+  },
+  {
+    title: 'Social Media Content',
+    description: 'Content systems for Reels, TikTok, posts, stories and personal brands.',
+  },
+  {
+    title: 'AI Automation',
+    description: 'Smart workflows that save time, automate tasks and connect tools.',
+  },
+  {
+    title: 'Modeling',
+    description: 'Personal-brand visuals, shoots and modeling content with a premium look.',
+  },
+  {
+    title: 'Business Systems',
+    description: 'Digital systems for leads, clients, workflows, dashboards and growth.',
+  },
 ]
 
 export const services = [
@@ -20,37 +38,37 @@ export const services = [
 export const projects = [
   {
     name: 'FuelRadar',
-    description: 'A smarter fuel price discovery app concept built for everyday decisions.',
+    description: 'A smart fuel-price discovery app built to help drivers find better prices, save money and make faster everyday decisions.',
     status: 'In development',
     action: 'external' as ProjectAction,
-    href: '#', // TODO: Add final FuelRadar link here.
+    href: 'https://www.fuel-radar.online/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleASI4qVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadok8DKdM4Hmdw1NdXMkZs9zw0VLfXRzNCuSvvWhGHesKIjsuown2XYdycHlQ_aem_uQM5HiFZA_vHK-jYJpWVhg',
     cta: 'View project',
   },
   {
     name: 'EntrepreneurAI',
-    description: 'AI systems designed to turn business ideas into clear action.',
+    description: 'An AI-powered entrepreneurship concept that helps young people turn ideas into clear business action.',
     status: 'Concept',
     action: 'concept' as ProjectAction,
     cta: 'View concept',
   },
   {
-    name: 'Fashfluencer',
-    description: 'A fashion and creator platform I help build, focused on personal branding, social media presence and creator growth.',
+    name: 'CreatorWerk',
+    description: 'A creator and personal-brand platform focused on content, community, shootings, events and digital presence.',
     status: 'Platform',
     action: 'external' as ProjectAction,
-    href: '#', // TODO: Add final Fashfluencer link here.
+    href: 'https://creator-werk.de/',
     cta: 'View project',
   },
   {
     name: 'Client Websites',
-    description: 'Premium websites and landing pages built for real clients, brands and events.',
+    description: 'Premium websites and landing pages built for real clients, brands and event businesses.',
     status: 'Library',
     action: 'client-library' as ProjectAction,
     cta: 'Open library',
   },
   {
     name: 'Social Media Projects',
-    description: 'Profiles, short-form systems and platform presence built around brand growth.',
+    description: 'Personal content systems for Instagram, TikTok and Facebook, built around reach, consistency and personal branding.',
     status: 'Active',
     action: 'social-library' as ProjectAction,
     cta: 'View accounts',
@@ -82,7 +100,7 @@ export const socialLinks = [
   {
     platform: 'Instagram',
     description: 'Personal brand, lifestyle and creator updates.',
-    href: '#', // TODO: Add final Instagram profile link here.
+    href: 'https://www.instagram.com/luis_floria_official?igsh=MW8xdnFxeHU0cDZ6bA%3D%3D&utm_source=qr',
   },
   {
     platform: 'TikTok',

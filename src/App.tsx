@@ -152,7 +152,8 @@ function App() {
             {capabilities.map((capability, index) => (
               <motion.article
                 className="glass-card capability"
-                key={capability}
+                key={capability.title}
+                tabIndex={0}
                 initial={{ opacity: 0, y: 22 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
@@ -160,7 +161,8 @@ function App() {
                 whileHover={{ y: -5, borderColor: 'rgba(52, 91, 220, 0.62)' }}
               >
                 <span>0{index + 1}</span>
-                <h3>{capability}</h3>
+                <h3>{capability.title}</h3>
+                <p>{capability.description}</p>
               </motion.article>
             ))}
           </div>
@@ -327,7 +329,7 @@ function App() {
       {activeModal === 'concept' && (
         <Modal title="EntrepreneurAI" eyebrow="Concept" onClose={() => setActiveModal(null)}>
           <p className="modal-copy">
-            AI systems designed to move a business idea from first thought to sharper execution.
+            An AI-powered entrepreneurship concept that helps young people turn ideas into clear business action.
           </p>
         </Modal>
       )}
