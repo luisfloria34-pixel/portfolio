@@ -56,11 +56,11 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
     const mobile = window.matchMedia('(max-width: 600px)')
     const applyDeviceLayout = () => {
       const isMobile = mobile.matches
-      core.scale.setScalar(isMobile ? 0.72 : 1)
-      core.position.x = isMobile ? 0.1 : 0
+      core.scale.setScalar(isMobile ? 0.88 : 1)
+      core.position.x = isMobile ? -0.04 : 0
       core.position.y = isMobile ? -0.1 : 0
-      camera.fov = isMobile ? 52 : 44
-      camera.position.z = isMobile ? 6.7 : 5.3
+      camera.fov = isMobile ? 50 : 44
+      camera.position.z = isMobile ? 6.05 : 5.3
       camera.updateProjectionMatrix()
     }
     scene.add(new AmbientLight('#ffffff', 0.28))
@@ -164,9 +164,9 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       const isMobile = mobile.matches
       core.rotation.y += delta * (0.18 + scroll * 1.35)
       core.rotation.x = pointer.y * 0.18 + scroll * 0.54
-      core.position.x = (isMobile ? 0.08 : 0) + pointer.x * (isMobile ? 0.08 : 0.2) + scroll * (isMobile ? 0.16 : 0.55)
-      core.position.y = (isMobile ? -0.18 : 0) + pointer.y * (isMobile ? 0.05 : 0.12) - scroll * (isMobile ? 0.12 : 0.32)
-      camera.position.z = (isMobile ? 6.7 : 5.3) - scroll * (isMobile ? 0.6 : 1.25)
+      core.position.x = (isMobile ? -0.04 : 0) + pointer.x * (isMobile ? 0.08 : 0.2) + scroll * (isMobile ? 0.12 : 0.55)
+      core.position.y = (isMobile ? -0.2 : 0) + pointer.y * (isMobile ? 0.05 : 0.12) - scroll * (isMobile ? 0.1 : 0.32)
+      camera.position.z = (isMobile ? 6.05 : 5.3) - scroll * (isMobile ? 0.5 : 1.25)
       renderer.render(scene, camera)
     }
 
