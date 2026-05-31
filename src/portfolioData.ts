@@ -56,7 +56,7 @@ export const projects = [
     description: 'A creator and personal-brand platform focused on content, community, shootings, events and digital presence.',
     status: 'Platform',
     action: 'external' as ProjectAction,
-    href: 'https://www.fuel-radar.online/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleASI5y9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadzBhQqHDFoFXDyTPcko92AMUlp-KoGWUwSVRimdWrTA5fvAffKta68A0j8-Q_aem_YC9xxXwc6q03MVkIDxzkYQ',
+    href: 'https://creator-werk.de/',
     cta: 'View project',
   },
   {

@@ -20,11 +20,6 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
   )
 }
 
-function openExternalLink(href?: string) {
-  if (!href || href === '#') return
-  window.open(href, '_blank', 'noopener,noreferrer')
-}
-
 function ToolLogo({ icon, name }: { icon: string; name: string }) {
   if (icon === 'github') {
     return (
@@ -238,17 +233,20 @@ function App() {
                 </div>
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (project.action === 'external') openExternalLink('href' in project ? project.href : undefined)
-                    if (project.action === 'client-library') setActiveModal('clients')
-                    if (project.action === 'social-library') setActiveModal('social')
-                    if (project.action === 'concept') setActiveModal('concept')
-                  }}
-                >
-                  {project.cta}
-                </button>
+                {project.action === 'external' && 'href' in project ? (
+                  <a href={project.href} target="_blank" rel="noreferrer">{project.cta}</a>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      if (project.action === 'client-library') setActiveModal('clients')
+                      if (project.action === 'social-library') setActiveModal('social')
+                      if (project.action === 'concept') setActiveModal('concept')
+                    }}
+                  >
+                    {project.cta}
+                  </button>
+                )}
               </motion.article>
             ))}
           </div>
@@ -309,7 +307,7 @@ function App() {
             <h2>Start with<br />an idea.</h2>
             <p>Websites, apps, content systems or a brand ready for its next move.</p>
             <div className="contact-methods">
-              <span>Instagram</span>
+              <a href={socialLinks[0].href} target="_blank" rel="noreferrer">Instagram</a>
               <span>Email</span>
               <span>Project inquiry</span>
             </div>
@@ -378,9 +376,9 @@ function App() {
                 <div>
                   <h4>{website.title}</h4>
                   <p>{website.description}</p>
-                  <button type="button" onClick={() => openExternalLink(website.href)}>
+                  <a href={website.href} target="_blank" rel="noreferrer">
                     Open Website
-                  </button>
+                  </a>
                 </div>
               </article>
             ))}
@@ -395,9 +393,9 @@ function App() {
               <article className="social-card" key={profile.platform}>
                 <span>{profile.platform}</span>
                 <p>{profile.description}</p>
-                <button type="button" onClick={() => openExternalLink(profile.href)}>
+                <a href={profile.href} target="_blank" rel="noreferrer">
                   Open Profile
-                </button>
+                </a>
               </article>
             ))}
           </div>

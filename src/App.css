@@ -400,18 +400,21 @@
   line-height: 1.65;
 }
 
-.project button {
+.project button,
+.project a {
   align-self: start;
   border: 0;
   padding: 0;
   color: #d8def7;
   background: transparent;
   font-size: 12px;
+  text-decoration: none;
   cursor: pointer;
   transition: color 180ms ease, transform 180ms ease;
 }
 
-.project button:hover {
+.project button:hover,
+.project a:hover {
   color: var(--white);
   transform: translateX(4px);
 }
@@ -634,6 +637,10 @@
   font-size: 13px;
 }
 
+.contact-methods a {
+  color: inherit;
+}
+
 .inquiry {
   border: 1px solid rgba(255, 255, 255, 0.11);
   border-radius: 16px;
@@ -742,13 +749,14 @@ footer {
 }
 
 .modal-close,
-.library-card button,
-.social-card button {
+.library-card a,
+.social-card a {
   border: 1px solid rgba(74, 114, 234, 0.44);
   border-radius: 999px;
   color: #d9e1ff;
   background: rgba(0, 33, 140, 0.18);
   cursor: pointer;
+  text-decoration: none;
   transition: transform 180ms ease, background 180ms ease, border-color 180ms ease;
 }
 
@@ -758,8 +766,8 @@ footer {
 }
 
 .modal-close:hover,
-.library-card button:hover,
-.social-card button:hover {
+.library-card a:hover,
+.social-card a:hover {
   transform: translateY(-2px);
   background: rgba(0, 33, 140, 0.34);
   border-color: rgba(116, 146, 245, 0.72);
@@ -824,8 +832,10 @@ footer {
   flex: 1;
 }
 
-.library-card button,
-.social-card button {
+.library-card a,
+.social-card a {
+  align-self: flex-start;
+  display: inline-flex;
   margin-top: 20px;
   padding: 11px 15px;
   font-size: 12px;
