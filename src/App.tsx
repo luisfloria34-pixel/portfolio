@@ -1,68 +1,9 @@
-import { lazy, Suspense, type FormEvent, type ReactNode, useRef } from 'react'
+import { lazy, Suspense, type FormEvent, type ReactNode, useRef, useState } from 'react'
 import { motion, useScroll, useSpring, useTransform, type MotionValue } from 'framer-motion'
+import { capabilities, clientWebsites, projects, services, socialLinks, tools } from './portfolioData'
 import './App.css'
 
 const IntroScene = lazy(() => import('./IntroScene'))
-
-const capabilities = [
-  'Apps',
-  'Websites',
-  'Social Media Content',
-  'AI Automation',
-  'Branding',
-  'Business Systems',
-]
-
-const projects = [
-  {
-    name: 'FuelRadar',
-    description: 'A smarter fuel price discovery app concept built for everyday decisions.',
-    status: 'In development',
-  },
-  {
-    name: 'EntrepreneurAI',
-    description: 'AI systems designed to turn business ideas into clear action.',
-    status: 'Concept',
-  },
-  {
-    name: 'CreatorAI',
-    description: 'Content workflows for creators who need speed without losing identity.',
-    status: 'Concept',
-  },
-  {
-    name: 'Event Websites',
-    description: 'Focused landing experiences built to inform, convert and feel premium.',
-    status: 'Available',
-  },
-  {
-    name: 'Social Media Projects',
-    description: 'Visual content systems shaped around brand consistency and reach.',
-    status: 'Active',
-  },
-]
-
-const stack = [
-  'React',
-  'Next.js',
-  'Supabase',
-  'Expo',
-  'AI Tools',
-  'Cursor',
-  'Claude',
-  'Lovable',
-  'Netlify',
-  'GitHub',
-  'Canva',
-  'Figma',
-]
-
-const services = [
-  'Website design',
-  'App concepts',
-  'Social media content',
-  'Branding',
-  'Automation systems',
-]
 
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
@@ -78,8 +19,55 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
   )
 }
 
+function openExternalLink(href?: string) {
+  if (!href || href === '#') return
+  window.open(href, '_blank', 'noopener,noreferrer')
+}
+
+function Modal({
+  title,
+  eyebrow,
+  children,
+  onClose,
+}: {
+  title: string
+  eyebrow: string
+  children: ReactNode
+  onClose: () => void
+}) {
+  return (
+    <motion.div
+      className="modal-backdrop"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        className="modal-card"
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        exit={{ opacity: 0, y: 20, scale: 0.98 }}
+        transition={{ duration: 0.28, ease: [0.16, 1, 0.3, 1] }}
+        onClick={(event) => event.stopPropagation()}
+      >
+        <div className="modal-head">
+          <div>
+            <span className="eyebrow">{eyebrow}</span>
+            <h3>{title}</h3>
+          </div>
+          <button type="button" className="modal-close" onClick={onClose} aria-label="Close modal">Close</button>
+        </div>
+        {children}
+      </motion.div>
+    </motion.div>
+  )
+}
+
 function App() {
   const introRef = useRef<HTMLElement>(null)
+  const [activeModal, setActiveModal] = useState<'clients' | 'social' | 'concept' | null>(null)
+  const [activeTool, setActiveTool] = useState<(typeof tools)[number] | null>(null)
   const { scrollYProgress } = useScroll({ target: introRef, offset: ['start start', 'end end'] })
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.45 })
   const nameOpacity = useTransform(progress, [0, 0.42, 0.56], [1, 1, 0])
@@ -192,7 +180,17 @@ function App() {
                 </div>
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
-                <button type="button">View project</button>
+                <button
+                  type="button"
+                  onClick={() => {
+                    if (project.action === 'external') openExternalLink('href' in project ? project.href : undefined)
+                    if (project.action === 'client-library') setActiveModal('clients')
+                    if (project.action === 'social-library') setActiveModal('social')
+                    if (project.action === 'concept') setActiveModal('concept')
+                  }}
+                >
+                  {project.cta}
+                </button>
               </motion.article>
             ))}
           </div>
@@ -221,7 +219,12 @@ function App() {
             <h2>Tools I build with</h2>
           </Reveal>
           <Reveal className="stack-list">
-            {stack.map((tool) => <span key={tool}>{tool}</span>)}
+            {tools.map((tool) => (
+              <button type="button" key={tool.name} onClick={() => setActiveTool(tool)}>
+                <span className="tool-icon">{tool.icon}</span>
+                {tool.name}
+              </button>
+            ))}
           </Reveal>
         </section>
 
@@ -285,6 +288,58 @@ function App() {
         <span>Personal Brand / Germany</span>
         <span>&copy; 2026</span>
       </footer>
+
+      {activeModal === 'clients' && (
+        <Modal title="Client Websites" eyebrow="Website library" onClose={() => setActiveModal(null)}>
+          <div className="library-grid">
+            {clientWebsites.map((website) => (
+              <article className="library-card" key={website.title}>
+                <img src={website.image} alt="" loading="lazy" />
+                <div>
+                  <h4>{website.title}</h4>
+                  <p>{website.description}</p>
+                  <button type="button" onClick={() => openExternalLink(website.href)}>
+                    Open Website
+                  </button>
+                </div>
+              </article>
+            ))}
+          </div>
+        </Modal>
+      )}
+
+      {activeModal === 'social' && (
+        <Modal title="Social Media Projects" eyebrow="Profiles" onClose={() => setActiveModal(null)}>
+          <div className="social-grid">
+            {socialLinks.map((profile) => (
+              <article className="social-card" key={profile.platform}>
+                <span>{profile.platform}</span>
+                <p>{profile.description}</p>
+                <button type="button" onClick={() => openExternalLink(profile.href)}>
+                  Open Profile
+                </button>
+              </article>
+            ))}
+          </div>
+        </Modal>
+      )}
+
+      {activeModal === 'concept' && (
+        <Modal title="EntrepreneurAI" eyebrow="Concept" onClose={() => setActiveModal(null)}>
+          <p className="modal-copy">
+            AI systems designed to move a business idea from first thought to sharper execution.
+          </p>
+        </Modal>
+      )}
+
+      {activeTool && (
+        <Modal title={activeTool.name} eyebrow="Tool stack" onClose={() => setActiveTool(null)}>
+          <div className="tool-modal">
+            <span className="tool-modal-icon">{activeTool.icon}</span>
+            <p>{activeTool.description}</p>
+          </div>
+        </Modal>
+      )}
     </div>
   )
 }

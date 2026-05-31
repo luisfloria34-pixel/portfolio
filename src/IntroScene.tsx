@@ -4,13 +4,14 @@ import {
   ACESFilmicToneMapping,
   AmbientLight,
   BufferGeometry,
+  DoubleSide,
   Float32BufferAttribute,
   Fog,
   Group,
   IcosahedronGeometry,
   Mesh,
   MeshBasicMaterial,
-  MeshPhysicalMaterial,
+  MeshStandardMaterial,
   PerspectiveCamera,
   PointLight,
   Points,
@@ -18,10 +19,13 @@ import {
   Scene,
   SpotLight,
   SRGBColorSpace,
+  TextureLoader,
   TorusGeometry,
   Timer,
+  Vector3,
   WebGLRenderer,
 } from 'three'
+import { planetTiles } from './portfolioData'
 
 function seededValue(seed: number) {
   const value = Math.sin(seed * 91.347) * 47453.5453
@@ -75,21 +79,44 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
     scene.add(new Points(particlesGeometry, particlesMaterial))
 
     const core = new Group()
-    const coreGeometry = new IcosahedronGeometry(1.24, 2)
-    const solid = new Mesh(
-      coreGeometry,
-      new MeshPhysicalMaterial({
-        color: '#07153e',
-        roughness: 0.2,
-        metalness: 0.84,
-        clearcoat: 1,
-        transmission: 0.16,
-        emissive: '#001a70',
-        emissiveIntensity: 0.85,
-      }),
-    )
-    const wire = new Mesh(coreGeometry, new MeshBasicMaterial({ color: '#315de0', wireframe: true, transparent: true, opacity: 0.32 }))
-    wire.scale.setScalar(1.01)
+    const textureLoader = new TextureLoader()
+    const textures = planetTiles.map((tile) => {
+      const texture = textureLoader.load(tile)
+      texture.colorSpace = SRGBColorSpace
+      return texture
+    })
+    const faceGeometry = new IcosahedronGeometry(1.24, 2).toNonIndexed()
+    const position = faceGeometry.getAttribute('position')
+    const uv = [0.5, 0.98, 0.04, 0.04, 0.96, 0.04]
+
+    for (let face = 0; face < position.count; face += 3) {
+      const faceIndex = face / 3
+      const points = [0, 1, 2].flatMap((offset) => [
+        position.getX(face + offset),
+        position.getY(face + offset),
+        position.getZ(face + offset),
+      ])
+      const geometry = new BufferGeometry()
+      geometry.setAttribute('position', new Float32BufferAttribute(points, 3))
+      geometry.setAttribute('uv', new Float32BufferAttribute(uv, 2))
+      geometry.computeVertexNormals()
+      const material = new MeshStandardMaterial({
+        map: textures[(faceIndex * 11) % textures.length],
+        color: '#b8c7ff',
+        roughness: 0.64,
+        metalness: 0.18,
+        emissive: '#001458',
+        emissiveIntensity: 0.18,
+        side: DoubleSide,
+      })
+      const tileMesh = new Mesh(geometry, material)
+      const normal = new Vector3(points[0], points[1], points[2]).normalize()
+      tileMesh.position.copy(normal.multiplyScalar(0.012))
+      core.add(tileMesh)
+    }
+
+    const wire = new Mesh(faceGeometry.clone(), new MeshBasicMaterial({ color: '#9bb1ff', wireframe: true, transparent: true, opacity: 0.25 }))
+    wire.scale.setScalar(1.014)
     const blueRing = new Mesh(
       new TorusGeometry(1.82, 0.008, 16, 150),
       new MeshBasicMaterial({ color: '#315de0', transparent: true, opacity: 0.7 }),
@@ -100,7 +127,7 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       new MeshBasicMaterial({ color: '#ffffff', transparent: true, opacity: 0.28 }),
     )
     glassRing.rotation.set(0.32, 0.75, 0)
-    core.add(solid, wire, blueRing, glassRing, new PointLight('#002aff', 35, 7))
+    core.add(wire, blueRing, glassRing, new PointLight('#002aff', 35, 7))
     scene.add(core)
 
     const pointer = { x: 0, y: 0 }
@@ -137,6 +164,8 @@ export default function IntroScene({ progress }: { progress: MotionValue<number>
       window.removeEventListener('pointermove', updatePointer)
       particlesGeometry.dispose()
       particlesMaterial.dispose()
+      textures.forEach((texture) => texture.dispose())
+      faceGeometry.dispose()
       core.traverse((object) => {
         if (object instanceof Mesh) {
           object.geometry.dispose()
