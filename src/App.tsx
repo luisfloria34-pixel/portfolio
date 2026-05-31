@@ -234,7 +234,7 @@ function App() {
                 <h3>{project.name}</h3>
                 <p>{project.description}</p>
                 {project.action === 'external' && 'href' in project ? (
-                  <a href={project.href} target="_blank" rel="noreferrer">{project.cta}</a>
+                  <a href={project.href}>{project.cta}</a>
                 ) : (
                   <button
                     type="button"
@@ -307,7 +307,7 @@ function App() {
             <h2>Start with<br />an idea.</h2>
             <p>Websites, apps, content systems or a brand ready for its next move.</p>
             <div className="contact-methods">
-              <a href={socialLinks[0].href} target="_blank" rel="noreferrer">Instagram</a>
+              <a href={socialLinks[0].href}>Instagram</a>
               <span>Email</span>
               <span>Project inquiry</span>
             </div>
@@ -351,7 +351,7 @@ function App() {
           </Reveal>
           <Reveal className="visible-social-grid">
             {socialLinks.map((profile) => (
-              <a className="visible-social-card" href={profile.href} target="_blank" rel="noreferrer" key={profile.platform}>
+              <a className="visible-social-card" href={profile.href} key={profile.platform}>
                 <span>{profile.platform}</span>
                 <p>{profile.description}</p>
                 <small>Open profile</small>
@@ -376,7 +376,7 @@ function App() {
                 <div>
                   <h4>{website.title}</h4>
                   <p>{website.description}</p>
-                  <a href={website.href} target="_blank" rel="noreferrer">
+                  <a href={website.href}>
                     Open Website
                   </a>
                 </div>
@@ -393,7 +393,7 @@ function App() {
               <article className="social-card" key={profile.platform}>
                 <span>{profile.platform}</span>
                 <p>{profile.description}</p>
-                <a href={profile.href} target="_blank" rel="noreferrer">
+                <a href={profile.href}>
                   Open Profile
                 </a>
               </article>
