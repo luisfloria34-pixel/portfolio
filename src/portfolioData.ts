@@ -83,7 +83,7 @@ export const clientWebsites = [
     href: 'https://www.eventmanufaktur-esch.de/',
   },
   {
-    title: 'Höpfi',
+    title: 'Hüpfi',
     description: 'A client website preview focused on clear brand presentation.',
     image: '/images/client-sites/hoepfi.webp',
     href: 'https://www.xn--hpfi-0ra.de/',
@@ -116,63 +116,68 @@ export const socialLinks = [
 
 export const tools = [
   {
+    name: 'Notion',
+    icon: 'notion',
+    description: 'Workspace for planning, notes, docs and organized project systems.',
+  },
+  {
     name: 'React',
-    icon: 'React',
+    icon: 'react',
     description: 'Frontend library for building modern user interfaces.',
   },
   {
     name: 'Next.js',
-    icon: 'Next',
+    icon: 'next',
     description: 'Framework for fast, scalable web applications.',
   },
   {
     name: 'Supabase',
-    icon: 'Supa',
+    icon: 'supabase',
     description: 'Backend, database and authentication.',
   },
   {
     name: 'Expo',
-    icon: 'Expo',
+    icon: 'expo',
     description: 'Mobile app development with React Native.',
   },
   {
     name: 'AI Tools',
-    icon: 'AI',
+    icon: 'ai',
     description: 'Automation, content and workflow acceleration.',
   },
   {
     name: 'Cursor',
-    icon: 'Cursor',
+    icon: 'cursor',
     description: 'AI-powered coding environment.',
   },
   {
     name: 'Claude',
-    icon: 'Claude',
+    icon: 'claude',
     description: 'AI assistant for planning, coding and writing.',
   },
   {
     name: 'Lovable',
-    icon: 'Love',
+    icon: 'lovable',
     description: 'Fast AI website and app prototyping.',
   },
   {
     name: 'Netlify',
-    icon: 'Netlify',
+    icon: 'netlify',
     description: 'Hosting and deployment for modern websites.',
   },
   {
     name: 'GitHub',
-    icon: 'GitHub',
+    icon: 'github',
     description: 'Code versioning and project collaboration.',
   },
   {
     name: 'Canva',
-    icon: 'Canva',
+    icon: 'canva',
     description: 'Visual content and brand design.',
   },
   {
     name: 'Figma',
-    icon: 'Figma',
+    icon: 'figma',
     description: 'UI/UX design and prototyping.',
   },
 ]

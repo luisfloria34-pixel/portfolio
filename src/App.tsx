@@ -4,6 +4,7 @@ import { capabilities, clientWebsites, projects, services, socialLinks, tools } 
 import './App.css'
 
 const IntroScene = lazy(() => import('./IntroScene'))
+const featuredToolNames = ['Notion', 'Claude', 'GitHub', 'Canva', 'Expo']
 
 function Reveal({ children, className = '' }: { children: ReactNode; className?: string }) {
   return (
@@ -22,6 +23,59 @@ function Reveal({ children, className = '' }: { children: ReactNode; className?:
 function openExternalLink(href?: string) {
   if (!href || href === '#') return
   window.open(href, '_blank', 'noopener,noreferrer')
+}
+
+function ToolLogo({ icon, name }: { icon: string; name: string }) {
+  if (icon === 'github') {
+    return (
+      <svg viewBox="0 0 24 24" aria-label={name}>
+        <path fill="currentColor" d="M12 2C6.48 2 2 6.58 2 12.25c0 4.53 2.87 8.37 6.84 9.73.5.1.68-.22.68-.49v-1.72c-2.78.62-3.37-1.38-3.37-1.38-.45-1.18-1.11-1.5-1.11-1.5-.91-.64.07-.63.07-.63 1 .07 1.53 1.06 1.53 1.06.9 1.57 2.35 1.12 2.92.86.09-.67.35-1.12.63-1.38-2.22-.26-4.55-1.14-4.55-5.07 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.3.1-2.71 0 0 .84-.28 2.75 1.05A9.32 9.32 0 0 1 12 6.98c.85 0 1.7.12 2.5.34 1.9-1.33 2.74-1.05 2.74-1.05.55 1.41.2 2.45.1 2.71.64.72 1.03 1.63 1.03 2.75 0 3.94-2.34 4.8-4.57 5.06.36.32.68.95.68 1.92v2.84c0 .27.18.59.69.49A10.17 10.17 0 0 0 22 12.25C22 6.58 17.52 2 12 2Z" />
+      </svg>
+    )
+  }
+
+  if (icon === 'expo') {
+    return (
+      <svg viewBox="0 0 24 24" aria-label={name}>
+        <path fill="currentColor" d="M9.28 6.18c.58-.96 1.02-1.33 1.62-1.33h2.2c.6 0 1.04.37 1.62 1.33l5.85 9.7c.44.74.55 1.28.28 1.72-.25.42-.78.62-1.56.62h-1.36c-.76 0-1.1-.18-1.48-.83l-3.9-6.62c-.24-.4-.86-.4-1.1 0l-3.9 6.62c-.38.65-.72.83-1.48.83H4.71c-.78 0-1.31-.2-1.56-.62-.27-.44-.16-.98.28-1.72l5.85-9.7Z" />
+      </svg>
+    )
+  }
+
+  if (icon === 'canva') {
+    return (
+      <svg viewBox="0 0 24 24" aria-label={name}>
+        <defs>
+          <linearGradient id="canva-gradient" x1="2" x2="22" y1="20" y2="4">
+            <stop stopColor="#00C4CC" />
+            <stop offset="0.55" stopColor="#7D2AE8" />
+            <stop offset="1" stopColor="#FF738E" />
+          </linearGradient>
+        </defs>
+        <circle cx="12" cy="12" r="10" fill="url(#canva-gradient)" />
+        <path fill="#fff" d="M15.7 14.6c-.7 1.1-1.8 1.8-3.2 1.8-2.2 0-3.7-1.6-3.7-4s1.7-4.8 4.1-4.8c1.2 0 2.1.5 2.6 1.3.3.5.2 1.1-.3 1.3-.5.2-.9.02-1.2-.4-.26-.39-.65-.58-1.17-.58-1.25 0-2.16 1.46-2.16 3.12 0 1.36.76 2.27 1.95 2.27.69 0 1.26-.34 1.7-1.02.28-.43.75-.55 1.18-.31.43.25.48.82.2 1.31Z" />
+      </svg>
+    )
+  }
+
+  if (icon === 'claude') {
+    return (
+      <svg viewBox="0 0 24 24" aria-label={name}>
+        <path fill="currentColor" d="M8.04 4.5h2.6L8.58 19.5h-2.6L8.04 4.5Zm5.28 0h2.57l2.13 15h-2.58l-.39-3.12H10.9l-1.24 3.12H7.08L13.32 4.5Zm1.43 9.65-.64-5.12-2.13 5.12h2.77Z" />
+      </svg>
+    )
+  }
+
+  if (icon === 'notion') {
+    return (
+      <svg viewBox="0 0 24 24" aria-label={name}>
+        <path fill="#fff" d="M5.1 4.3 16.85 3.45c1.44-.12 1.83-.04 2.74.63l.38.29c.62.46.83.58.83 1.07v13.28c0 .86-.32 1.38-1.45 1.45L5.7 20.98c-.86.05-1.27-.08-1.72-.67l-.95-1.23c-.52-.68-.73-1.19-.73-1.79V5.93c0-.7.31-1.13 2.8-1.63Z" />
+        <path fill="#050505" d="M6.04 8.27v9.83l11.98-.7V6.8l-1.87.15v7.45L10.4 7.38l-4.36.89Zm4.14.84 4.76 5.82V7.03l1.2-.08v8.88l-1.24.08-4.97-6.08v6.36l-1.25.08V9.2l1.5-.09Z" />
+      </svg>
+    )
+  }
+
+  return <span>{name.slice(0, 2)}</span>
 }
 
 function Modal({
@@ -66,8 +120,10 @@ function Modal({
 
 function App() {
   const introRef = useRef<HTMLElement>(null)
-  const [activeModal, setActiveModal] = useState<'clients' | 'social' | 'concept' | null>(null)
+  const [activeModal, setActiveModal] = useState<'clients' | 'social' | 'concept' | 'tools' | null>(null)
   const [activeTool, setActiveTool] = useState<(typeof tools)[number] | null>(null)
+  const featuredTools = tools.filter((tool) => featuredToolNames.includes(tool.name))
+  const extraTools = tools.filter((tool) => !featuredToolNames.includes(tool.name))
   const { scrollYProgress } = useScroll({ target: introRef, offset: ['start start', 'end end'] })
   const progress = useSpring(scrollYProgress, { stiffness: 90, damping: 24, mass: 0.45 })
   const nameOpacity = useTransform(progress, [0, 0.42, 0.56], [1, 1, 0])
@@ -221,12 +277,18 @@ function App() {
             <h2>Tools I build with</h2>
           </Reveal>
           <Reveal className="stack-list">
-            {tools.map((tool) => (
+            {featuredTools.map((tool) => (
               <button type="button" key={tool.name} onClick={() => setActiveTool(tool)}>
-                <span className="tool-icon">{tool.icon}</span>
+                <span className={`tool-icon tool-icon-${tool.icon}`}>
+                  <ToolLogo icon={tool.icon} name={tool.name} />
+                </span>
                 {tool.name}
               </button>
             ))}
+            <button type="button" className="more-tools-button" onClick={() => setActiveModal('tools')}>
+              <span className="tool-icon">+</span>
+              More tools
+            </button>
           </Reveal>
         </section>
 
@@ -350,10 +412,36 @@ function App() {
         </Modal>
       )}
 
+      {activeModal === 'tools' && (
+        <Modal title="More Tools" eyebrow="Full stack" onClose={() => setActiveModal(null)}>
+          <div className="tools-grid">
+            {extraTools.map((tool) => (
+              <button
+                type="button"
+                className="tools-grid-card"
+                key={tool.name}
+                onClick={() => {
+                  setActiveModal(null)
+                  setActiveTool(tool)
+                }}
+              >
+                <span className={`tool-icon tool-icon-${tool.icon}`}>
+                  <ToolLogo icon={tool.icon} name={tool.name} />
+                </span>
+                <strong>{tool.name}</strong>
+                <small>{tool.description}</small>
+              </button>
+            ))}
+          </div>
+        </Modal>
+      )}
+
       {activeTool && (
         <Modal title={activeTool.name} eyebrow="Tool stack" onClose={() => setActiveTool(null)}>
           <div className="tool-modal">
-            <span className="tool-modal-icon">{activeTool.icon}</span>
+            <span className={`tool-modal-icon tool-icon-${activeTool.icon}`}>
+              <ToolLogo icon={activeTool.icon} name={activeTool.name} />
+            </span>
             <p>{activeTool.description}</p>
           </div>
         </Modal>
