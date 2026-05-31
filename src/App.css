@@ -3,6 +3,7 @@
 }
 
 .page {
+  min-width: 0;
   overflow: clip;
   background:
     radial-gradient(circle at 78% 57%, rgba(0, 33, 140, 0.12), transparent 32%),
@@ -173,6 +174,7 @@
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   background: rgba(5, 5, 5, 0.68);
   backdrop-filter: blur(18px);
+  overflow-x: clip;
 }
 
 .wordmark {
@@ -729,6 +731,7 @@ footer {
     rgba(9, 10, 14, 0.92);
   box-shadow: 0 30px 120px rgba(0, 0, 0, 0.58);
   padding: clamp(22px, 4vw, 36px);
+  overscroll-behavior: contain;
 }
 
 .modal-head {
@@ -939,6 +942,7 @@ footer {
 
   .name-frame h1 {
     font-size: clamp(4rem, 27vw, 8rem);
+    letter-spacing: -0.08em;
   }
 
   .scroll-cue {
@@ -950,6 +954,7 @@ footer {
   .nav {
     height: 65px;
     gap: 18px;
+    padding-inline: 18px;
   }
 
   .nav-links {
@@ -958,6 +963,11 @@ footer {
 
   .nav-action {
     padding: 10px 15px;
+    white-space: nowrap;
+  }
+
+  .shell {
+    padding-block: clamp(64px, 14vw, 96px);
   }
 
   .section-heading,
@@ -971,10 +981,15 @@ footer {
 
   .section-heading h2 {
     margin-top: 26px;
+    font-size: clamp(2.25rem, 12vw, 4.5rem);
   }
 
   .capabilities {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .capability {
+    min-height: 210px;
   }
 
   .project-grid {
@@ -990,7 +1005,48 @@ footer {
   .project:nth-child(4),
   .project:nth-child(5) {
     grid-column: auto;
-    min-height: 238px;
+    min-height: auto;
+  }
+
+  .project h3 {
+    margin-top: 70px;
+  }
+
+  .stack-list button {
+    flex: 1 1 calc(50% - 8px);
+    justify-content: flex-start;
+  }
+
+  .visible-social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .library-grid,
+  .social-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .library-card {
+    min-height: auto;
+  }
+
+  .library-card img {
+    height: clamp(150px, 42vw, 240px);
+  }
+
+  .modal-backdrop {
+    align-items: end;
+    padding: 12px;
+  }
+
+  .modal-card {
+    width: 100%;
+    max-height: calc(100svh - 24px);
+    border-radius: 18px;
+  }
+
+  .modal-head {
+    align-items: center;
   }
 
   .story-image {
@@ -1008,12 +1064,94 @@ footer {
 }
 
 @media (max-width: 480px) {
+  .intro {
+    height: 360svh;
+  }
+
+  .intro-meta {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
+  .name-frame {
+    left: 18px;
+    right: 18px;
+    bottom: 118px;
+  }
+
+  .name-frame h1 {
+    font-size: clamp(4.2rem, 25vw, 6.7rem);
+  }
+
+  .name-frame p {
+    max-width: 260px;
+    line-height: 1.55;
+  }
+
+  .scroll-cue {
+    left: 18px;
+    gap: 10px;
+    letter-spacing: 0.18em;
+  }
+
+  .scroll-cue i {
+    width: 32px;
+  }
+
+  .wordmark {
+    font-size: 20px;
+  }
+
+  .nav-action {
+    padding: 9px 12px;
+    font-size: 11px;
+  }
+
+  .shell {
+    padding-inline: 18px;
+  }
+
   .capabilities {
     grid-template-columns: 1fr;
   }
 
+  .capability {
+    min-height: auto;
+  }
+
+  .capability h3 {
+    margin-top: 34px;
+  }
+
+  .project {
+    padding: 22px;
+  }
+
+  .project h3 {
+    margin-top: 54px;
+  }
+
+  .stack-list button {
+    flex-basis: 100%;
+  }
+
+  .contact-methods {
+    flex-wrap: wrap;
+    gap: 12px 18px;
+  }
+
   .inquiry form {
     grid-template-columns: 1fr;
+  }
+
+  .inquiry {
+    padding: 18px;
+  }
+
+  .inquiry input,
+  .inquiry select,
+  .inquiry textarea {
+    font-size: 16px;
   }
 
   .visible-social-grid,
@@ -1028,8 +1166,39 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .tools-grid-card,
+  .visible-social-card {
+    min-height: auto;
+  }
+
   .modal-card {
     border-radius: 16px;
+  }
+
+  .modal-head {
+    gap: 16px;
+  }
+
+  .modal-close {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 360px) {
+  .name-frame h1 {
+    font-size: clamp(3.6rem, 24vw, 5.4rem);
+  }
+
+  .project-status {
+    max-width: 170px;
+    line-height: 1.4;
+  }
+
+  .section-heading h2,
+  .story-copy h2,
+  .offer h2,
+  .contact-copy h2 {
+    letter-spacing: -0.06em;
   }
 }
 
