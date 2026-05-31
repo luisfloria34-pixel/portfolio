@@ -283,6 +283,22 @@ function App() {
             </form>
           </Reveal>
         </section>
+
+        <section className="socials-visible shell" aria-label="Social links">
+          <Reveal className="section-heading compact">
+            <span className="eyebrow">08 / Socials</span>
+            <h2>Follow the build</h2>
+          </Reveal>
+          <Reveal className="visible-social-grid">
+            {socialLinks.map((profile) => (
+              <a className="visible-social-card" href={profile.href} target="_blank" rel="noreferrer" key={profile.platform}>
+                <span>{profile.platform}</span>
+                <p>{profile.description}</p>
+                <small>Open profile</small>
+              </a>
+            ))}
+          </Reveal>
+        </section>
       </main>
 
       <footer>

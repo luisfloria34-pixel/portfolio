@@ -541,6 +541,54 @@
   gap: clamp(42px, 8vw, 100px);
 }
 
+.socials-visible {
+  padding-top: clamp(42px, 7vw, 88px);
+}
+
+.visible-social-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.visible-social-card {
+  min-height: 170px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  padding: 24px;
+  background:
+    radial-gradient(circle at 20% 0, rgba(53, 93, 232, 0.18), transparent 42%),
+    rgba(255, 255, 255, 0.04);
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.visible-social-card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(74, 114, 234, 0.62);
+  background:
+    radial-gradient(circle at 20% 0, rgba(53, 93, 232, 0.28), transparent 42%),
+    rgba(255, 255, 255, 0.055);
+}
+
+.visible-social-card span {
+  display: block;
+  color: var(--white);
+  font-size: 22px;
+  letter-spacing: -0.05em;
+}
+
+.visible-social-card p {
+  margin: 18px 0 22px;
+  color: var(--grey);
+  font-size: 13px;
+  line-height: 1.65;
+}
+
+.visible-social-card small {
+  color: #d9e1ff;
+  font-size: 12px;
+}
+
 .contact-copy .eyebrow {
   display: block;
   margin-bottom: 24px;
@@ -861,6 +909,7 @@ footer {
     grid-template-columns: 1fr;
   }
 
+  .visible-social-grid,
   .library-grid,
   .social-grid {
     grid-template-columns: 1fr;

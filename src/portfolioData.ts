@@ -41,7 +41,7 @@ export const projects = [
     description: 'A smart fuel-price discovery app built to help drivers find better prices, save money and make faster everyday decisions.',
     status: 'In development',
     action: 'external' as ProjectAction,
-    href: 'https://www.fuel-radar.online/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleASI4qVleHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadok8DKdM4Hmdw1NdXMkZs9zw0VLfXRzNCuSvvWhGHesKIjsuown2XYdycHlQ_aem_uQM5HiFZA_vHK-jYJpWVhg',
+    href: 'https://www.fuel-radar.online/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleASI5y9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadzBhQqHDFoFXDyTPcko92AMUlp-KoGWUwSVRimdWrTA5fvAffKta68A0j8-Q_aem_YC9xxXwc6q03MVkIDxzkYQ',
     cta: 'View project',
   },
   {
@@ -56,7 +56,7 @@ export const projects = [
     description: 'A creator and personal-brand platform focused on content, community, shootings, events and digital presence.',
     status: 'Platform',
     action: 'external' as ProjectAction,
-    href: 'https://creator-werk.de/',
+    href: 'https://www.fuel-radar.online/?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAdGRleASI5y9leHRuA2FlbQIxMQBzcnRjBmFwcF9pZA8xMjQwMjQ1NzQyODc0MTQAAadzBhQqHDFoFXDyTPcko92AMUlp-KoGWUwSVRimdWrTA5fvAffKta68A0j8-Q_aem_YC9xxXwc6q03MVkIDxzkYQ',
     cta: 'View project',
   },
   {
@@ -77,22 +77,22 @@ export const projects = [
 
 export const clientWebsites = [
   {
-    title: 'Premium Launch Page',
-    description: 'A cinematic landing page for a high-intent product or brand launch.',
-    image: '/images/luis-editorial.webp',
-    href: '#', // TODO: Add final client website link here.
+    title: 'Eventmanufaktur Esch',
+    description: 'Event business website with clean structure and premium local presence.',
+    image: '/images/client-sites/eventmanufaktur.webp',
+    href: 'https://www.eventmanufaktur-esch.de/',
   },
   {
-    title: 'Event Website',
-    description: 'A clean event page with strong visuals, details and conversion flow.',
-    image: '/images/luis-sunset.webp',
-    href: '#', // TODO: Add final client website link here.
+    title: 'Höpfi',
+    description: 'A client website preview focused on clear brand presentation.',
+    image: '/images/client-sites/hoepfi.webp',
+    href: 'https://www.xn--hpfi-0ra.de/',
   },
   {
-    title: 'Brand Portfolio',
-    description: 'A dark luxury-tech portfolio layout for a creator or personal brand.',
-    image: '/images/planet/tile-03.webp',
-    href: '#', // TODO: Add final client website link here.
+    title: 'Swyone',
+    description: 'A modern website preview with strong digital product positioning.',
+    image: '/images/client-sites/swyone.webp',
+    href: 'https://swyone.com/',
   },
 ]
 
@@ -105,12 +105,12 @@ export const socialLinks = [
   {
     platform: 'TikTok',
     description: 'Short-form content, ideas and growth experiments.',
-    href: '#', // TODO: Add final TikTok profile link here.
+    href: 'https://www.tiktok.com/@luisfloria_lifestyle?_r=1&_t=ZG-96ojtskcWcz',
   },
   {
     platform: 'Facebook',
     description: 'Community presence and wider project updates.',
-    href: '#', // TODO: Add final Facebook profile link here.
+    href: 'https://www.facebook.com/share/1E7dcv4JoY/?mibextid=wwXIfr',
   },
 ]
 
