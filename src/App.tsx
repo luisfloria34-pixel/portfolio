@@ -139,6 +139,9 @@ function App() {
             <IntroScene progress={progress as MotionValue<number>} />
           </Suspense>
           <div className="vignette" />
+          <div className="intro-device" aria-hidden="true">
+            <span className="device-phone">LF</span>
+          </div>
           <div className="intro-meta">
             <span>Personal Brand / AI / Apps / Web</span>
             <span>Romanian / Italian - based in Germany</span>
