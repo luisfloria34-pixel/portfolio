@@ -42,60 +42,6 @@
   background: radial-gradient(circle at 58% 49%, rgba(0, 33, 140, 0.28), transparent 26%);
 }
 
-.intro-device {
-  position: absolute;
-  left: 50%;
-  top: 49%;
-  z-index: 1;
-  width: min(520px, calc(100vw - 44px));
-  aspect-ratio: 1.72;
-  transform-origin: center;
-  translate: -50% -50%;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 22px;
-  background:
-    radial-gradient(circle at 50% 48%, rgba(74, 114, 234, 0.18), transparent 29%),
-    linear-gradient(145deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.018)),
-    rgba(6, 7, 12, 0.72);
-  box-shadow: 0 34px 120px rgba(0, 0, 0, 0.56), 0 0 70px rgba(0, 33, 140, 0.22);
-  backdrop-filter: blur(18px);
-  pointer-events: none;
-  animation: deviceIntro 4.2s cubic-bezier(0.16, 1, 0.3, 1) both;
-}
-
-.intro-device::before {
-  content: '';
-  position: absolute;
-  inset: 48px 34px 28px;
-  border: 1px solid rgba(74, 114, 234, 0.22);
-  border-radius: 18px;
-  background:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04) 1px, transparent 1px);
-  background-size: 48px 48px;
-  mask-image: radial-gradient(circle at 50% 50%, #000 0 52%, transparent 78%);
-}
-
-.device-phone {
-  position: absolute;
-  left: 50%;
-  top: 51%;
-  width: 72px;
-  height: 132px;
-  translate: -50% -50%;
-  display: grid;
-  place-items: center;
-  border: 1px solid rgba(255, 255, 255, 0.24);
-  border-radius: 18px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(160, 174, 223, 0.1) 44%, rgba(0, 0, 0, 0.72)),
-    rgba(255, 255, 255, 0.05);
-  box-shadow: 0 0 46px rgba(255, 255, 255, 0.14);
-  color: var(--white);
-  font-size: 18px;
-  letter-spacing: -0.08em;
-}
-
 .vignette {
   position: absolute;
   inset: 0;
@@ -980,60 +926,6 @@ footer {
   }
 }
 
-@keyframes deviceIntro {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 16px, 0) scale(0.86) rotate(-4deg);
-  }
-
-  16% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-
-  44% {
-    opacity: 1;
-    transform: translate3d(220px, -8px, 0) scale(0.82) rotate(7deg);
-  }
-
-  68% {
-    opacity: 0.92;
-    transform: translate3d(0, 0, 0) scale(0.94) rotate(0deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate3d(0, -12px, 0) scale(0.9) rotate(0deg);
-  }
-}
-
-@keyframes deviceIntroMobile {
-  0% {
-    opacity: 0;
-    transform: translate3d(0, 14px, 0) scale(0.88) rotate(-4deg);
-  }
-
-  16% {
-    opacity: 1;
-    transform: translate3d(0, 0, 0) scale(1) rotate(0deg);
-  }
-
-  44% {
-    opacity: 1;
-    transform: translate3d(76px, -6px, 0) scale(0.84) rotate(7deg);
-  }
-
-  68% {
-    opacity: 0.9;
-    transform: translate3d(0, 0, 0) scale(0.94) rotate(0deg);
-  }
-
-  100% {
-    opacity: 0;
-    transform: translate3d(0, -10px, 0) scale(0.9) rotate(0deg);
-  }
-}
-
 @media (max-width: 800px) {
   .intro-meta {
     flex-direction: column;
@@ -1178,24 +1070,6 @@ footer {
 
   .intro-sticky {
     height: 100dvh;
-  }
-
-  .intro-device {
-    top: 48%;
-    width: min(330px, calc(100vw - 38px));
-    border-radius: 18px;
-    animation-name: deviceIntroMobile;
-  }
-
-  .intro-device::before {
-    inset: 42px 20px 22px;
-    background-size: 36px 36px;
-  }
-
-  .device-phone {
-    width: 54px;
-    height: 102px;
-    border-radius: 15px;
   }
 
   .vignette {
